@@ -162,6 +162,7 @@
 
         [_hwencoder initEncodeWidth:480 height:640];
         [_hwencoder setDelegate:self];
+        [self setVideoQuality:_videoQuality];
         return YES;
     } else {
         _encoder = [[AVCEncoder alloc] init];
@@ -334,21 +335,27 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 #ifndef SIMULATOR
     switch (videoQuality) {
         case RMVideoQualityLow:
-            if ([self shouldUseH264HwEncoderImpl]) {} else {
+            if ([self shouldUseH264HwEncoderImpl]) {
+                [_hwencoder setAverageBitRate:BPS_LOW frameRate:FPS_LOW];
+            } else {
                 [_encoder setAveragebps:BPS_LOW];
             }
             [self setCameraFPS:FPS_LOW];
             break;
 
         case RMVideoQualityDefault:
-            if ([self shouldUseH264HwEncoderImpl]) {} else {
+            if ([self shouldUseH264HwEncoderImpl]) {
+                [_hwencoder setAverageBitRate:BPS_DEFAULT frameRate:FPS_DEFAULT];
+            } else {
                 [_encoder setAveragebps:BPS_DEFAULT];
             }
             [self setCameraFPS:FPS_DEFAULT];
             break;
 
         case RMVideoQualityHigh:
-            if ([self shouldUseH264HwEncoderImpl]) {} else {
+            if ([self shouldUseH264HwEncoderImpl]) {
+                [_hwencoder setAverageBitRate:BPS_HIGH frameRate:FPS_HIGH];
+            } else {
                 [_encoder setAveragebps:BPS_HIGH];
             }
             [self setCameraFPS:FPS_HIGH];

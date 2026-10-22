@@ -24,6 +24,8 @@
 
     //    VTDecompressionSessionRef _decoderSession;
     CMVideoFormatDescriptionRef _decoderFormatDescription;
+    BOOL _parameterSetsChanged;
+    BOOL _hasKeyFrame;
 }
 
 @end
@@ -57,6 +59,12 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    free(_sps);
+    free(_pps);
+    if (_decoderFormatDescription) {
+        CFRelease(_decoderFormatDescription);
+    }
 }
 
 - (void)applicationWillResignActive:(id)notification
@@ -158,14 +166,32 @@ const uint8_t KStartCode[4] = {0, 0, 0, 1};
 }
 
 -(BOOL)initH264Decoder {
+    if (!_sps || !_pps) {
+        return NO;
+    }
+
+    if (_decoderFormatDescription && !_parameterSetsChanged) {
+        return YES;
+    }
+
     const uint8_t* const parameterSetPointers[2] = { _sps, _pps };
     const size_t parameterSetSizes[2] = { _spsSize, _ppsSize };
-    CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault,
+    CMVideoFormatDescriptionRef formatDescription = NULL;
+    OSStatus status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault,
                                                                           2, //param count
                                                                           parameterSetPointers,
                                                                           parameterSetSizes,
                                                                           4, //nal start code size
-                                                                          &_decoderFormatDescription);
+                                                                          &formatDescription);
+    if (status != noErr) {
+        return NO;
+    }
+
+    if (_decoderFormatDescription) {
+        CFRelease(_decoderFormatDescription);
+    }
+    _decoderFormatDescription = formatDescription;
+    _parameterSetsChanged = NO;
 
     return YES;
 }
@@ -220,22 +246,32 @@ const uint8_t KStartCode[4] = {0, 0, 0, 1};
         switch (nalType) {
             case 0x05:
                 if([self initH264Decoder]) {
+                    _hasKeyFrame = YES;
                     pixelBuffer = [self decode:videoPacket];
                 }
                 break;
             case 0x07:
+                free(_sps);
                 _spsSize = videoPacket.length - 4;
                 _sps = malloc(_spsSize);
                 memcpy(_sps, videoPacket.bytes + 4, _spsSize);
+                _parameterSetsChanged = YES;
                 break;
             case 0x08:
+                free(_pps);
                 _ppsSize = videoPacket.length - 4;
                 _pps = malloc(_ppsSize);
                 memcpy(_pps, videoPacket.bytes + 4, _ppsSize);
+                _parameterSetsChanged = YES;
+                break;
+            case 0x01:
+                // Predicted frames are useless (and corrupt the display) until a keyframe has arrived
+                if (_decoderFormatDescription && _hasKeyFrame) {
+                    pixelBuffer = [self decode:videoPacket];
+                }
                 break;
 
             default:
-                pixelBuffer = [self decode:videoPacket];
                 break;
         }
 

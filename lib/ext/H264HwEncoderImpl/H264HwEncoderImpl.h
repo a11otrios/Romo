@@ -19,6 +19,7 @@
 - (void) initWithConfiguration;
 - (void) initEncodeWidth:(int)width height:(int)height;
 - (void) encode:(CMSampleBufferRef )sampleBuffer;
+- (void) setAverageBitRate:(int)bitRate frameRate:(int)frameRate;
 - (void) stop;
 
 

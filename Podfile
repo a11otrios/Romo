@@ -36,6 +36,15 @@ post_install do |installer|
         end
     end
     
+    # Recent Xcode no longer ships libarclite, so pods targeting very old iOS fail to link
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 12.0
+                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+            end
+        end
+    end
+
     # Needed for simulators running on Apple Silicon
     installer
     .pods_project.build_configurations.each do |config|

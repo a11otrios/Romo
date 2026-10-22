@@ -98,6 +98,13 @@ static GLfloat vertexCoordinates[] = {
     CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
     CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
     
+    // A single corrupt or incomplete frame puts the layer into the failed state,
+    // after which it silently drops everything. Flush it so the next keyframe can display.
+    if (_displayLayer.status == AVQueuedSampleBufferRenderingStatusFailed) {
+        NSLog(@"Display layer failed: %@", _displayLayer.error);
+        [_displayLayer flush];
+    }
+
     if([_displayLayer isReadyForMoreMediaData])
     {
         [_displayLayer enqueueSampleBuffer:sampleBuffer];
