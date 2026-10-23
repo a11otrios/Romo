@@ -16,7 +16,7 @@ Recordings are not stored in git. Each answer has a folder on the phone, named b
 
     /sdcard/Android/media/com.theo.assistant/clips/<id>/
 
-Put any number of `.mp3`, `.m4a`, `.ogg`, `.opus`, `.wav` or `.aac` files in it, for example:
+Put any number of audio files (`.mp3`, `.m4a`, `.ogg`, `.opus`, `.wav`, `.aac`) or screen recordings (`.mp4`, `.webm`, `.3gp`, `.mkv`) in it. Videos play full screen, so Theo sees the Assistant's animation too, for example:
 
     adb shell mkdir -p /sdcard/Android/media/com.theo.assistant/clips/sing_song
     adb push sing_song_1.m4a sing_song_2.m4a /sdcard/Android/media/com.theo.assistant/clips/sing_song/

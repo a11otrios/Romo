@@ -24,8 +24,10 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,7 @@ public class MainActivity extends Activity implements RecognitionListener {
     private TextView heardText;
     private TextView replyText;
     private TextView hint;
+    private VideoView video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +122,25 @@ public class MainActivity extends Activity implements RecognitionListener {
         root.addView(hint, hintLp);
 
         root.setOnClickListener(v -> tapped());
-        setContentView(root);
+
+        // Recorded answers with the Assistant's screen play full screen on top.
+        video = new VideoView(this);
+        video.setVisibility(View.GONE);
+        video.setOnCompletionListener(mp -> finishedTalking());
+        video.setOnErrorListener((mp, what, extra) -> {
+            finishedTalking();
+            return true;
+        });
+        FrameLayout videoBox = new FrameLayout(this);
+        videoBox.setBackgroundColor(Color.BLACK);
+        videoBox.setVisibility(View.GONE);
+        videoBox.addView(video, new FrameLayout.LayoutParams(-1, -1, Gravity.CENTER));
+        videoBox.setOnClickListener(v -> tapped());
+
+        FrameLayout screen = new FrameLayout(this);
+        screen.addView(root, new FrameLayout.LayoutParams(-1, -1));
+        screen.addView(videoBox, new FrameLayout.LayoutParams(-1, -1));
+        setContentView(screen);
     }
 
     @Override
@@ -190,7 +211,15 @@ public class MainActivity extends Activity implements RecognitionListener {
         main.postDelayed(() -> recognizer.startListening(intent), 150);
     }
 
+    private void hideVideo() {
+        if (video == null) return;
+        video.stopPlayback();
+        video.setVisibility(View.GONE);
+        ((View) video.getParent()).setVisibility(View.GONE);
+    }
+
     private void stopEverything() {
+        hideVideo();
         if (recognizer != null) recognizer.cancel();
         if (tts != null) tts.stop();
         if (player != null) {
@@ -248,6 +277,14 @@ public class MainActivity extends Activity implements RecognitionListener {
     private void respond(Brain.Answer answer) {
         dots.setMode(DotsView.Mode.TALKING);
         hint.setText("Tap to stop");
+        if (answer.clip != null && Brain.isVideo(answer.clip)) {
+            replyText.setText("");
+            ((View) video.getParent()).setVisibility(View.VISIBLE);
+            video.setVisibility(View.VISIBLE);
+            video.setVideoPath(answer.clip.getAbsolutePath());
+            video.start();
+            return;
+        }
         if (answer.clip != null) {
             replyText.setText("");
             try {
@@ -279,6 +316,7 @@ public class MainActivity extends Activity implements RecognitionListener {
     }
 
     private void finishedTalking() {
+        hideVideo();
         if (player != null) {
             player.release();
             player = null;

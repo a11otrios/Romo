@@ -46,7 +46,8 @@ final class Brain {
     private static final Set<String> FILLER = new HashSet<>(Arrays.asList(
             "hey", "ok", "okay", "google", "please", "can", "you", "a", "an", "the", "me", "us",
             "to", "for", "some", "now", "again", "another", "one", "do", "will", "would", "could"));
-    private static final String[] CLIP_TYPES = {".mp3", ".m4a", ".ogg", ".opus", ".wav", ".aac"};
+    private static final String[] CLIP_TYPES = {".mp3", ".m4a", ".ogg", ".opus", ".wav", ".aac", ".mp4", ".webm", ".3gp", ".mkv"};
+    private static final String[] VIDEO_TYPES = {".mp4", ".webm", ".3gp", ".mkv"};
 
     private final List<Intent> intents = new ArrayList<>();
     private final Map<String, String> lastClip = new HashMap<>();
@@ -108,6 +109,12 @@ final class Brain {
             }
         }
         return found;
+    }
+
+    static boolean isVideo(File clip) {
+        String name = clip.getName().toLowerCase(Locale.ROOT);
+        for (String type : VIDEO_TYPES) if (name.endsWith(type)) return true;
+        return false;
     }
 
     /** Picks the best of everything the recogniser heard. */
