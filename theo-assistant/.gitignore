@@ -1,0 +1,5 @@
+build/
+.gradle/
+local.properties
+# Recorded Assistant clips are family-only; they go straight onto the phones, never into git.
+clips/

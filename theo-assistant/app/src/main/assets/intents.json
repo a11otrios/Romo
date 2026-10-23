@@ -1,0 +1,490 @@
+{
+ "unknown": "Hmm, I'm not sure about that one. Try asking me to sing a song!",
+ "intents": [
+  {
+   "id": "sing_song",
+   "match": [
+    "sing song",
+    "sing me",
+    "sing something",
+    "sing"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "happy_birthday",
+   "match": [
+    "happy birthday",
+    "my birthday",
+    "birthday song"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "lullaby",
+   "match": [
+    "lullaby",
+    "sleepy song"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "twinkle",
+   "match": [
+    "twinkle"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "serenade",
+   "match": [
+    "serenade"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "fox",
+   "match": [
+    "fox say",
+    "fox"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "snowman",
+   "match": [
+    "snowman"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "dogs_out",
+   "match": [
+    "let dogs out",
+    "who let dogs"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "pineapple",
+   "match": [
+    "pineapple"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "rap",
+   "match": [
+    "rap"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "beatbox",
+   "match": [
+    "beatbox",
+    "beat box",
+    "drop beat"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "dance",
+   "match": [
+    "dance",
+    "dancing"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "party",
+   "match": [
+    "party"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "animal_cow",
+   "match": [
+    "cow"
+   ],
+   "fallback": "Moo!"
+  },
+  {
+   "id": "animal_dog",
+   "match": [
+    "dog say",
+    "dog sound",
+    "doggy"
+   ],
+   "fallback": "Woof woof!"
+  },
+  {
+   "id": "animal_cat",
+   "match": [
+    "cat say",
+    "cat sound",
+    "kitty"
+   ],
+   "fallback": "Meow!"
+  },
+  {
+   "id": "animal_lion",
+   "match": [
+    "lion"
+   ],
+   "fallback": "Roar!"
+  },
+  {
+   "id": "animal_duck",
+   "match": [
+    "duck"
+   ],
+   "fallback": "Quack quack!"
+  },
+  {
+   "id": "animal_pig",
+   "match": [
+    "pig"
+   ],
+   "fallback": "Oink oink!"
+  },
+  {
+   "id": "animal_sounds",
+   "match": [
+    "animal sound",
+    "animal sounds",
+    "animal noise"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "favourite_animal",
+   "match": [
+    "favourite animal",
+    "favorite animal"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "joke",
+   "match": [
+    "joke",
+    "something funny",
+    "funny"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "knock_knock",
+   "match": [
+    "knock knock"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "chicken",
+   "match": [
+    "chicken cross"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "laugh",
+   "match": [
+    "laugh"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "tickle",
+   "match": [
+    "tickle",
+    "ticklish"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "fart",
+   "match": [
+    "fart",
+    "burp",
+    "toot"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "alligator",
+   "match": [
+    "alligator"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "self_destruct",
+   "match": [
+    "self destruct"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "sandwich",
+   "match": [
+    "sandwich"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "clean_room",
+   "match": [
+    "clean my room",
+    "clean room"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "homework",
+   "match": [
+    "homework"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "bored",
+   "match": [
+    "bored",
+    "surprise me",
+    "entertain me"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "nickname",
+   "match": [
+    "nickname"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "story",
+   "match": [
+    "story"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "game",
+   "match": [
+    "play game",
+    "game"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "riddle",
+   "match": [
+    "riddle"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "tongue_twister",
+   "match": [
+    "tongue twister"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "fact",
+   "match": [
+    "fact"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "how_old",
+   "match": [
+    "how old",
+    "your birthday",
+    "when birthday"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "favourite_colour",
+   "match": [
+    "favourite colour",
+    "favorite color",
+    "favourite color",
+    "favorite colour"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "favourite_food",
+   "match": [
+    "like to eat",
+    "favourite food",
+    "favorite food",
+    "ice cream"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "sleep",
+   "match": [
+    "do you sleep",
+    "you dream",
+    "sleep well"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "where_live",
+   "match": [
+    "where live",
+    "where do you live"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "friends",
+   "match": [
+    "your friends",
+    "my friend",
+    "best friend"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "human",
+   "match": [
+    "are you human",
+    "are you robot",
+    "are you real"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "love_you",
+   "match": [
+    "love you",
+    "like me"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "superhero",
+   "match": [
+    "superhero"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "mirror",
+   "match": [
+    "mirror",
+    "fairest"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "force",
+   "match": [
+    "force",
+    "stormtrooper",
+    "i am your father"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "easter_eggs",
+   "match": [
+    "easter egg"
+   ],
+   "fallback": "I don't know that one yet. Ask a grown-up to teach me!"
+  },
+  {
+   "id": "good_morning",
+   "match": [
+    "good morning"
+   ],
+   "fallback": "Good morning, Theo!"
+  },
+  {
+   "id": "good_night",
+   "match": [
+    "good night",
+    "night night"
+   ],
+   "fallback": "Good night, Theo. Sweet dreams!"
+  },
+  {
+   "id": "hello",
+   "match": [
+    "hello",
+    "hi",
+    "hey"
+   ],
+   "fallback": "Hi Theo!"
+  },
+  {
+   "id": "how_are_you",
+   "match": [
+    "how are you"
+   ],
+   "fallback": "I'm great, thanks for asking!"
+  },
+  {
+   "id": "thank_you",
+   "match": [
+    "thank you",
+    "thanks"
+   ],
+   "fallback": "You're welcome!"
+  },
+  {
+   "id": "coin",
+   "match": [
+    "flip coin",
+    "toss coin",
+    "heads tails"
+   ],
+   "builtin": true
+  },
+  {
+   "id": "dice",
+   "match": [
+    "roll dice",
+    "roll die",
+    "roll a die",
+    "dice"
+   ],
+   "builtin": true
+  },
+  {
+   "id": "number",
+   "match": [
+    "pick number",
+    "pick a number",
+    "random number"
+   ],
+   "builtin": true
+  },
+  {
+   "id": "rps",
+   "match": [
+    "rock paper scissors"
+   ],
+   "builtin": true
+  },
+  {
+   "id": "time",
+   "match": [
+    "what time",
+    "time is it"
+   ],
+   "builtin": true
+  }
+ ]
+}

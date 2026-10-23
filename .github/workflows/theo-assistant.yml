@@ -1,0 +1,41 @@
+name: Theo's Assistant APK
+
+on:
+  push:
+    paths:
+      - "theo-assistant/**"
+      - ".github/workflows/theo-assistant.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.14.3"
+      - name: Build
+        run: gradle -p theo-assistant assembleRelease --no-daemon
+      - name: Rename APK
+        run: cp theo-assistant/app/build/outputs/apk/release/app-release.apk theo-assistant.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: theo-assistant
+          path: theo-assistant.apk
+      - name: Publish as the "theo-assistant-latest" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete theo-assistant-latest --yes --cleanup-tag || true
+          gh release create theo-assistant-latest theo-assistant.apk \
+            --prerelease --target "$GITHUB_SHA" \
+            --title "Theo's Assistant (latest build)" \
+            --notes "Built from ${GITHUB_SHA::7} on ${GITHUB_REF_NAME}."
